@@ -15,6 +15,9 @@
         <Label Text="00:00"  HorizontalOptions="Center" 
                 VerticalOptions="Center"  FontSize="30"/>
 
+            <Label Text="Xatolar: 0/3"  HorizontalOptions="Center" 
+                VerticalOptions="Center"  FontSize="30" x:Name="XatoLabel"/>
+
             <Border x:Name="SudokuRamka" Stroke="Black"
            StrokeThickness="3" HorizontalOptions="Center"
                     VerticalOptions="Center" Padding="0" Margin="0">

@@ -5,6 +5,8 @@ namespace Sudoku42;
 public partial class SudokuPage : ContentPage
 {
 	private String daraja;
+
+	int xato = 0;
 	
     private readonly SudokuMantiq mantiq = new SudokuMantiq();
 	public string Daraja
@@ -133,42 +135,58 @@ public partial class SudokuPage : ContentPage
 		
 	}
 
-	private void XatoniTekshirish()
+	private async void XatoniTekshirish()
 	{// Sevinch
-     ////int qator = Grid.GetRow(tanlanganKatak);
-     ////int ustun = Grid.GetColumn(tanlanganKatak);
-     ////int qiymat = int.Parse(matnlar[qator, ustun].Text);
-     ////if (mantiq.XatoBormi(qator, ustun, qiymat))
-     ////{
-     ////	kataklar[qator,ustun].BackgroundColor = Colors.MistyRose;
-     ////	matnlar[qator,ustun].TextColor = Colors.Red;
-     ////}
-     ////else
-     ////      {
-     ////          kataklar[qator, ustun].BackgroundColor = Colors.White;
-     ////          matnlar[qator, ustun].TextColor = Colors.Black;
-     ////      }
-        ///
+		int qator = Grid.GetRow(tanlanganKatak);
+		int ustun = Grid.GetColumn(tanlanganKatak);
+		int qiymat = int.Parse(matnlar[qator, ustun].Text);
+		if (mantiq.XatoBormi(qator, ustun, qiymat))
+		{
+			kataklar[qator, ustun].BackgroundColor = Colors.MistyRose;
+			matnlar[qator, ustun].TextColor = Colors.Red;
+            xato++;
+            XatoLabel.Text = $"Xatolik: {xato}/3";
 
-        for (int qator=0;qator<9;qator++)
-			for(int ustun =0;ustun<9;ustun++)
+			if (xato == 3)
 			{
-				var katak = kataklar[qator, ustun];
-				var matn = matnlar[qator, ustun];
-				if (!int.TryParse(matn.Text, out int qiymat) && qiymat == 0) continue;
-                
-				if (mantiq.XatoBormi(qator, ustun, qiymat) && katak.GestureRecognizers.Count>0)
-				
-                    {
-						katak.BackgroundColor = Colors.MistyRose;
-						matn.TextColor = Colors.Red;
-					}
-				else if(katak.GestureRecognizers.Count > 0)
-                {
-					katak.BackgroundColor = Colors.White;
-					matn.TextColor = Colors.Black;
-				}
+				await DisplayAlert("Afsus", "Sudokuni yutqazdingiz", "OK");
+				//Shell.Current.GoToAsync(nameof(AsosiyPage), typeof(AsosiyPage));
 			}
+
+        }
+        else
+		{
+			kataklar[qator, ustun].BackgroundColor = Colors.White;
+			matnlar[qator, ustun].TextColor = Colors.Black;
+		}
+		/////
+
+
+		////for (int qator=0;qator<9;qator++)
+		////	for(int ustun =0;ustun<9;ustun++)
+		////	{
+		////		var katak = kataklar[qator, ustun];
+		////		var matn = matnlar[qator, ustun];
+		////		if (!int.TryParse(matn.Text, out int qiymat) && qiymat == 0) continue;
+                
+		////		if (mantiq.XatoBormi(qator, ustun, qiymat) && katak.GestureRecognizers.Count>0)
+				
+  ////                  {
+		////			//katak.BackgroundColor = Colors.MistyRose;
+		////			//matn.TextColor = Colors.Red;
+
+		////			xato++;
+		////			XatoLabel.Text = $"Xatolik: {xato}/3";
+
+  ////                  if (xato>3) await DisplayAlert("Afsus", "Sudokuni yutqazdingiz", "OK");
+
+  ////              }
+		////		else if(katak.GestureRecognizers.Count > 0)
+  ////              {
+		////			katak.BackgroundColor = Colors.White;
+		////			matn.TextColor = Colors.Black;
+		////		}
+		////	}
     }
 
 
