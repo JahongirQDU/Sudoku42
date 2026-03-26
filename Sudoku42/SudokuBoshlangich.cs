@@ -44,7 +44,7 @@ namespace Sudoku42
         {
 
             int[,] jadval = new int[9, 9];
-            JadvalTuldirish(jadval);
+            JadvalniTuldir(jadval);
             if (tur == 1) KataklarniOchirish(jadval, 40);
             else if (tur == 2) KataklarniOchirish(jadval, 35);
             else KataklarniOchirish(jadval, 30);
@@ -56,26 +56,37 @@ namespace Sudoku42
 
         }
 
-        private static bool JadvalTuldirish(int[,] jadval)
+        private static bool JadvalniTuldir(int[,] jadval)
         {
             for (int qator = 0; qator < 9; qator++)
             {
                 for (int ustun = 0; ustun < 9; ustun++)
                 {
-                    var sonlar = Enumerable.Range(1, 9).OrderBy(x => Guid.NewGuid()).ToList();
-                    foreach (var son in sonlar)
+                    if (jadval[qator, ustun] == 0)
                     {
-                        if (JoylashMimkinmi(jadval, qator, ustun, son))
-                            jadval[qator, ustun] = son;
-                        if (JadvalTuldirish(jadval)) return true;
-                        jadval[qator, ustun] = 0;
-                    }
-                    return false;
+                        var sonlar = Enumerable.Range(1, 9)
+                                               .OrderBy(x => Guid.NewGuid())
+                                               .ToList();
 
+                        foreach (var son in sonlar)
+                        {
+                            if (JoylashMimkinmi(jadval, qator, ustun, son))
+                            {
+                                jadval[qator, ustun] = son;
+
+                                if (JadvalniTuldir(jadval))
+                                    return true;
+
+                                jadval[qator, ustun] = 0;
+                            }
+                        }
+                        return false;
+                    }
                 }
             }
             return true;
         }
+
         public static bool JoylashMimkinmi(int[,] jadval, int qator, int ustun, int son)
         {
             for (int u = 0; u < 9; u++)

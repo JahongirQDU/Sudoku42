@@ -8,9 +8,14 @@ public partial class DarajaPage2 : ContentPage
 	{
 		InitializeComponent();
 	}
-
-	private async Task SudokuOynagaUt(string daraja)
-	{ await Shell.Current.GoToAsync($"{nameof(SudokuPage)}?daraja={daraja}"); }
+    public static class DarajaXotira
+    {
+        public static string Daraja = "oson";
+    }
+    private async Task SudokuOynagaUt(string daraja)
+	{ 
+        DarajaXotira.Daraja = daraja;
+        await Shell.Current.GoToAsync($"{nameof(SudokuPage)}?daraja={daraja}"); }
 
 
     private async void Button_Oson(object sender, EventArgs e)
@@ -19,7 +24,7 @@ public partial class DarajaPage2 : ContentPage
     }
     private async void Button_Orta(object sender, EventArgs e)
     {
-        await SudokuOynagaUt("O'rta");
+        await SudokuOynagaUt("Normal");
     }
 
          private async void Button_Murakkab(object sender, EventArgs e)

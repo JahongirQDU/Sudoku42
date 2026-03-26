@@ -5,8 +5,8 @@ namespace Sudoku42;
 public partial class SudokuPage : ContentPage
 {
 	private String daraja;
-
-	private readonly SudokuMantiq mantiq = new SudokuMantiq();
+	
+    private readonly SudokuMantiq mantiq = new SudokuMantiq();
 	public string Daraja
 	{
 		get => daraja;
@@ -85,12 +85,19 @@ public partial class SudokuPage : ContentPage
 
  private  void BoshlangichSudokuJoylash()
 	{
-		mantiq.MaydonYuklash(SudokuBoshlangich.OsonYechim);
+		int tur;
+        if (DarajaPage2.DarajaXotira.Daraja == "Murakkab") tur = 3;
+        else if (DarajaPage2.DarajaXotira.Daraja == "Normal") tur = 2;
+        else tur = 1;
+
+		SudokuBoshlangich.SudokuTuz(tur);
+
+        mantiq.MaydonYuklash(SudokuBoshlangich.Jadval);
 		for (int i=0;i<9;i++)
 		{
 			for(int j=0;j<9;j++)
 			{
-				int qiymat = SudokuBoshlangich.OsonYechim[i, j];
+				int qiymat = SudokuBoshlangich.Jadval[i, j];
 				if (qiymat == 0) continue;
 				matnlar[i, j].Text = qiymat.ToString();
 				kataklar[i, j].BackgroundColor = Colors.LightGray;
