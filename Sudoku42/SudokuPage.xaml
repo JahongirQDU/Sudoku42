@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Sudoku42.SudokuPage"
+             Title="SudokuPage">
+    <ScrollView VerticalScrollBarVisibility="Never" > 
+        <VerticalStackLayout x:Name="AsosiyLayout"  Padding="40" Spacing="30">
+        
+            <Label  x:Name="DarajaLabel"
+            Text="OSON"
+            VerticalOptions="Center"  FontSize="30"
+            HorizontalOptions="Center" />
+            
+            
+        <Label Text="00:00"  HorizontalOptions="Center" 
+                VerticalOptions="Center"  FontSize="30"/>
+
+            <Border x:Name="SudokuRamka" Stroke="Black"
+           StrokeThickness="3" HorizontalOptions="Center"
+                    VerticalOptions="Center" Padding="0" Margin="0">
+           <Grid x:Name="SudokuKonteyner"  BackgroundColor="Transparent"
+              HorizontalOptions="Center" VerticalOptions="Center"    >
+
+                    <Grid x:Name="SudokuGrid" 
+                    RowSpacing="1" ColumnSpacing="1" BackgroundColor="Black"
+                      HorizontalOptions="Center" 
+                          VerticalOptions="Center" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                    </Grid>
+
+                    <BoxView BackgroundColor="Black"  WidthRequest="3"
+                     HorizontalOptions="Start" VerticalOptions="Fill" 
+ TranslationX="{Binding Width, Source={x:Reference SudokuGrid}, Converter={StaticResource UchdanBir}}"/>
+               
+                    <BoxView BackgroundColor="Black"  WidthRequest="3"
+          HorizontalOptions="Start"  VerticalOptions="Fill"
+                    TranslationX="{Binding Width, Source={x:Reference SudokuGrid}, Converter={StaticResource IkkiUchdanBir}}" />
+
+                    <BoxView BackgroundColor="Black"  HeightRequest="3"
+                   HorizontalOptions="Fill"  VerticalOptions="Start"
+ TranslationY="{Binding Height, Source={x:Reference SudokuGrid}, Converter={StaticResource UchdanBir}}" />
+
+                    <BoxView BackgroundColor="Black"  HeightRequest="3"
+                    HorizontalOptions="Fill"  VerticalOptions="Start" 
+TranslationY="{Binding Height, Source={x:Reference SudokuGrid}, Converter={StaticResource IkkiUchdanBir}}" />
+
+                </Grid>
+            </Border>
+        
+            
+            <!--Raqamlar-->
+            <Grid >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+            </Grid>
+
+
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="100">
+                <Button Text="O'chirish"/>
+                <Button Text="Yangilash"/>
+                <Button Text="Help"/>
+            </HorizontalStackLayout>
+
+            <Button Text="Asosiy oynaga qaytish"/>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
